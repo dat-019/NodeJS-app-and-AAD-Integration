@@ -1,20 +1,20 @@
-var graph = require('@microsoft/microsoft-graph-client');
+const graph = require('@microsoft/microsoft-graph-client');
 require('isomorphic-fetch');
 
 module.exports = {
   getUserDetails: async function(accessToken) {
 
-    const client = getAuthenticatedClient(accessToken);
+    var client = getAuthenticatedClient(accessToken);
 
-    const user = await client.api('/me').get();
+    var user = await client.api('/me').get();
     return user;
   },
 
   getEvents: async function(accessToken) {
 
-    const client = getAuthenticatedClient(accessToken);
+    var client = getAuthenticatedClient(accessToken);
 
-    const events = await client
+    var events = await client
       .api('/me/events')
       .select('subject,organizer,start,end')
       .orderby('createdDateTime DESC')
@@ -25,11 +25,18 @@ module.exports = {
 
   getUsers: async function(accessToken) {
 
-    const client = getAuthenticatedClient(accessToken);
-    const users = await client.api('/users')
-                        .get();
+    var client = getAuthenticatedClient(accessToken);
+    var users = await client.api('/users?$top=999').get();
     return users;
+  },
+
+  getUsersV2: async function(accessToken, requestUrl) {
+
+    var client = getAuthenticatedClient(accessToken);
+    var responsedBlog = await client.api(requestUrl).get();
+    return responsedBlog;
   }
+
 };
 
 function getAuthenticatedClient(accessToken) {
