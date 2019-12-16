@@ -92,3 +92,4 @@
 - simple-oauth2 for token management: https://github.com/lelylan/simple-oauth2
 - microsoft-graph-client for making calls to Microsoft Graph: https://github.com/microsoftgraph/msgraph-sdk-javascript
 - isomorphic-fetch to polyfill the fetch for Node. A fetch polyfill is required for the microsoft-graph-client library: https://github.com/matthew-andrews/isomorphic-fetch
+- MS Graph training with NodeJs app: https://github.com/microsoftgraph/msgraph-training-nodeexpressapp
