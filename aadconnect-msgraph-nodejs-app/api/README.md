@@ -33,8 +33,9 @@
 
     ![A screenshot of the Implicit grant section](/images/request_permission.png)
 
-    **Note**: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
-
+    <a name="step6Note">
+    > **Note**: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
+    </a>
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
     ![A screenshot of the Add a client secret dialog](/images/aad-new-client-secret.png)
@@ -67,9 +68,10 @@
 
 1. Open new browser, open `http://localhost:3000/auth/signin`, it will automatically redirect to current DXC login page. Use your DXC account with global password to sign in.
 1. Make sure keeping your current browser from previous step opened, type an enpoint in new browser tab. For testing purpose, the following endpoints have been developed in the project:
-    1. `http://localhost:3000/users/getAllUsers`: Get all users without setting 'top' parameter in the endpoint, by defautl the first 100 records will return.
-    1. `http://localhost:3000/users/getAllUsersV2`: Get all users with '$top=999' parameter in the endpoint. This method also supports to append all users in the returned array for the case the total number of users is greater than 999.
-    1. `http://localhost:3000/users/getFilteredUsers/abc`: Search for users with the specifiec name (e.g. 'abc') across multiple properties.
+    1. `http://localhost:3000/users/getAllUsers`: Get all users without setting 'top' parameter in the endpoint, by defautl the first 100 records will return.(*)
+    1. `http://localhost:3000/users/getAllUsersV2`: Get all users with '$top=999' parameter in the endpoint. This method also supports to append all users in the returned array for the case the total number of users is greater than 999.(*)
+    1. `http://localhost:3000/users/getFilteredUsers/abc`: Search for users with the specifiec name (e.g. 'abc') across multiple properties.(*)
     1. `http://localhost:3000/users/getCurrentUserDetail`: Get detail info for current logging user.
     1. `http://localhost:3000/calendar`: Get list of meeting schedules of current logging user.
     1. `http://localhost:3000/auth/signout`: Log out for current user.
+    **Note: As mentioned in the [step 6](#step6Note) above, the endpoints which are marked as (*) need admin consent permissions for usage.
