@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -12,19 +13,18 @@ var graph = require('./graph');
 // Configure simple-oauth2
 const oauth2 = require('simple-oauth2').create({
     client: {
-      id: '38b723d2-0132-413f-aaf6-66027fed95e7', //'30c463a5-ca3b-4bb8-b7e4-3bb224809b89',  //process.env.OAUTH_APP_ID,
-      secret: '.T]4efUWjK:Hi/0tOrdpThKyWxM8Q1?W' // '93f33571-550f-43cf-b09f-cd331338d086' // process.env.OAUTH_APP_PASSWORD
+      id: process.env.OAUTH_APP_ID, //'38b723d2-0132-413f-aaf6-66027fed95e7',
+      secret: process.env.OAUTH_APP_PASSWORD // .T]4efUWjK:Hi/0tOrdpThKyWxM8Q1?W
     },
     auth: {
-      tokenHost: 'https://login.microsoftonline.com/common', //process.env.OAUTH_AUTHORITY,
-      authorizePath: '/oauth2/v2.0/authorize', // process.env.OAUTH_AUTHORIZE_ENDPOINT,
-      tokenPath: '/oauth2/v2.0/token' //process.env.OAUTH_TOKEN_ENDPOINT
+      tokenHost: process.env.OAUTH_AUTHORITY, // 'https://login.microsoftonline.com/common',
+      authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT, // '/oauth2/v2.0/authorize'
+      tokenPath: process.env.OAUTH_TOKEN_ENDPOINT // '/oauth2/v2.0/token'
     }
   });
 
-  // In-memory storage of logged-in users
-// For demo purposes only, production apps should store
-// this in a reliable storage
+// In-memory storage of logged-in users
+// For demo purposes only
 var users = {};
 
 // Passport calls serializeUser and deserializeUser to
@@ -71,18 +71,17 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
   // Configure OIDC strategy
 passport.use(new OIDCStrategy(
     {
-      identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration', // `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
-      clientID: '38b723d2-0132-413f-aaf6-66027fed95e7',// '30c463a5-ca3b-4bb8-b7e4-3bb224809b89', // process.env.OAUTH_APP_ID,
+      identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`, // 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
+      clientID: process.env.OAUTH_APP_ID, // '38b723d2-0132-413f-aaf6-66027fed95e7',// '30c463a5-ca3b-4bb8-b7e4-3bb224809b89'
       responseType: 'code id_token',
       responseMode: 'form_post',
-      redirectUrl: 'http://localhost:3000/auth/callback', //process.env.OAUTH_REDIRECT_URI,
+      redirectUrl: process.env.OAUTH_REDIRECT_URI, // 'http://localhost:3000/auth/callback',
       allowHttpForRedirectUrl: true,
-      clientSecret: '.T]4efUWjK:Hi/0tOrdpThKyWxM8Q1?W', // '93f33571-550f-43cf-b09f-cd331338d086', //process.env.OAUTH_APP_PASSWORD,
+      clientSecret: process.env.OAUTH_APP_PASSWORD, // '.T]4efUWjK:Hi/0tOrdpThKyWxM8Q1?W',
       validateIssuer: false,
       passReqToCallback: false,
       loggingNoPII: false,
-      // scope: ['profile', 'offline_access', 'user.read'] //process.env.OAUTH_SCOPES.split(' ')
-      scope: ['profile', '.default', 'offline_access']
+      scope: process.env.OAUTH_SCOPES.split(' ') // ['profile', '.default', 'offline_access']
     },
     signInComplete
   ));
@@ -93,12 +92,12 @@ var authRouter = require('./routes/auth');
 var calendarRouter = require('./routes/calendar');
 
 var session = require('express-session');
-var flash = require('connect-flash');
+// var flash = require('connect-flash');
 
 var app = express();
 
 app.use(session({
-    secret: 'poc!@#$%',
+    secret: 'poc_pgf!@#$%',
     resave: false,
     saveUninitialized: false,
     unset: 'destroy'
