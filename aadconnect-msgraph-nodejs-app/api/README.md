@@ -34,7 +34,7 @@
     ![A screenshot of the Implicit grant section](/images/request_permission.png)
 
     <a name="step6Note">
-    <b>Note</b>: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
+    <b>Note</b>: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permissions can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}'.
     </a>
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
@@ -74,7 +74,8 @@
     1. `http://localhost:3000/users/getCurrentUserDetail`: Get detail info for current logging user.
     1. `http://localhost:3000/calendar`: Get list of meeting schedules of current logging user.
     1. `http://localhost:3000/auth/signout`: Log out for current user.
-    **Note: As mentioned in the [step 6](#step6Note) above, the endpoints which are marked as (*) need admin consent permissions for usage.
+
+    **Note**: As mentioned in the [step 6](#step6Note) above, the endpoints which are marked as (*) need admin consent permissions for usage.
 
 ## Some notes
 - Preferable approach for MS Graph API authentication flow: using confidential client app.
