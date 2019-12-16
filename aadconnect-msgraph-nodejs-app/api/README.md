@@ -75,3 +75,20 @@
     1. `http://localhost:3000/calendar`: Get list of meeting schedules of current logging user.
     1. `http://localhost:3000/auth/signout`: Log out for current user.
     **Note: As mentioned in the [step 6](#step6Note) above, the endpoints which are marked as (*) need admin consent permissions for usage.
+
+## Some notes
+- Preferable approach for MS Graph API authentication flow: using confidential client app.
+- Service to service calls using client credentials, flow:
+    - The client application authenticates to the Azure AD token issuance endpoint and requests an access token.
+    - The Azure AD token issuance endpoint issues the access token.
+    - The access token is used to authenticate to the secured resource.
+    - Data from the secured resource is returned to the client application.
+- Adding a delegated permission to an application does not automatically grant consent to the users within the tenant. Users must still manually consent for the added delegated permissions at runtime, unless the administrator grants consent on behalf of all users.
+
+## Reference
+- Microsoft Graph API endpoint, get all users: https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http
+- express-session to store values in an in-memory server-side session: https://github.com/expressjs/session
+- passport-azure-ad for authenticating and getting access tokens: https://github.com/AzureAD/passport-azure-ad
+- simple-oauth2 for token management: https://github.com/lelylan/simple-oauth2
+- microsoft-graph-client for making calls to Microsoft Graph: https://github.com/microsoftgraph/msgraph-sdk-javascript
+- isomorphic-fetch to polyfill the fetch for Node. A fetch polyfill is required for the microsoft-graph-client library: https://github.com/matthew-andrews/isomorphic-fetch
