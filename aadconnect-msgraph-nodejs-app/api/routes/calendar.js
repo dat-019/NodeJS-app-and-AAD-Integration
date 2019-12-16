@@ -10,10 +10,7 @@ router.get('/',
       // Redirect unauthenticated requests to home page
       res.redirect('/auth/signin');
     } else {
-      let params = {
-        active: { calendar: true }
-      };
-
+      
       // Get the access token
       var accessToken;
       try {
@@ -32,8 +29,8 @@ router.get('/',
           console.log(accessToken);
           // Get the events
           var events = await graph.getEvents(accessToken);
-          params.events = events.value;
-
+          //params.events = events.value;
+          res.json(events);
         } 
         catch (err) {
           req.flash('error_msg', {
@@ -43,7 +40,7 @@ router.get('/',
         }
       }
 
-      res.render('calendar', params);
+      // res.render('calendar', params);
     }
   }
 );

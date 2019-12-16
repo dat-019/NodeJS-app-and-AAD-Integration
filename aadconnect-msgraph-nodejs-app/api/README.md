@@ -17,7 +17,7 @@
     - Set **Supported account types** to **Accounts in any organizational directory and personal Microsoft accounts**.
     - Under **Redirect URI**, set the first drop-down to `Web` and set the value to `http://localhost:3000/auth/callback`.
 
-    ![A screenshot of the Register an application page](/images/aad-register-an-app.png)
+    ![A screenshot of the Register an application page](/images/app-registration.png)
 
 1. Choose **Register**. On the **Node.js Graph Tutorial** page, copy the value of the **Application (client) ID** and save it, you will need it in the next step.
 
@@ -26,6 +26,14 @@
 1. Select **Authentication** under **Manage**. Locate the **Implicit grant** section and enable **ID tokens**. Choose **Save**.
 
     ![A screenshot of the Implicit grant section](/images/aad-implicit-grant.png)
+
+1. Select **API permissions** under **Manage**. Choose the **+ Add a permission** button and in the **Commonly used Microsoft APIs**, choose **Microsoft Graph**.
+    - For **Delegated permissions**, select following permissions: User.ReadBasic.All, User.Read.All, User.ReadWrite.All, Directory.Read.All, Directory.ReadWrite.All, Directory.AccessAsUser.All
+    - For **Application permissions**, select following permissions: User.Read.All, User.ReadWrite.All, Directory.Read.All, Directory.ReadWrite.All
+
+    **Note**: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
+
+    ![A screenshot of the Implicit grant section](/images/request_permission.png)
 
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
@@ -57,4 +65,11 @@
     npm start
     ```
 
-1. Open a browser and browse to `http://localhost:3000`.
+1. Open a browser and browse to `http://localhost:3000/auth/signin`, it will automatically redirect to current DXC login page. Use your DXC account with global password to sign in.
+1. Make sure keeping your current browser from previous step opened, type a enpoint in new browser tab. For testing purpose, the following endpoints have been developed in the project:
+    1. `http://localhost:3000/users/getAllUsers`: Get all users without setting 'top' parameter in the endpoint, by defautl the first 100 records will return.
+    1. `http://localhost:3000/users/getAllUsersV2`: Get all users with '$top=999' parameter in the endpoint. This method also supports to append all users in the returned array for the case the total number of users is greater than 999.
+    1. `http://localhost:3000/users/getFilteredUsers/abc`: Search for users with the specifiec name (e.g. 'abc') across multiple properties.
+    1. `http://localhost:3000/users/getCurrentUserDetail`: Get detail info for current logging user.
+    1. `http://localhost:3000/calendar`: Get list of meeting schedules of current logging user.
+    1. `http://localhost:3000/auth/signout`: Log out for current user.

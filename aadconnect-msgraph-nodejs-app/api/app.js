@@ -72,7 +72,7 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
 passport.use(new OIDCStrategy(
     {
       identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`, // 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-      clientID: process.env.OAUTH_APP_ID, // '38b723d2-0132-413f-aaf6-66027fed95e7',// '30c463a5-ca3b-4bb8-b7e4-3bb224809b89'
+      clientID: process.env.OAUTH_APP_ID, // '38b723d2-0132-413f-aaf6-66027fed95e7'
       responseType: 'code id_token',
       responseMode: 'form_post',
       redirectUrl: process.env.OAUTH_REDIRECT_URI, // 'http://localhost:3000/auth/callback',
@@ -92,7 +92,6 @@ var authRouter = require('./routes/auth');
 var calendarRouter = require('./routes/calendar');
 
 var session = require('express-session');
-// var flash = require('connect-flash');
 
 var app = express();
 
