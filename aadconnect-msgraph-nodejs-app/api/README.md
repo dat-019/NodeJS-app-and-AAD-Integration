@@ -34,7 +34,7 @@
     ![A screenshot of the Implicit grant section](/images/request_permission.png)
 
     <a name="step6Note">
-    > **Note**: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
+    **Note**: We need an admin user in DXC tenant to grant admin consent for those permissions that are admin consent required. At the moment we are still waiting for this to be approved, for that reason some of Graph API endpoints which need those permission can not be used (e.g 'GET /users'; 'GET /users/{id | userPrincipalName}').
     </a>
 1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
 
