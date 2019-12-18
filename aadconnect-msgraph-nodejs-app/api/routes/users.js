@@ -20,7 +20,6 @@ router.get('/getCurrentUserDetail',
         try
         {
           accessToken = await tokens.getAccessToken(req);
-          console.log(accessToken);
         } catch (err) {
           console.log("Could not get access token. Try signing out and signing in again.");
           console.log(JSON.stringify(err));
@@ -57,9 +56,7 @@ router.get('/getAllUsers',
         var accessToken;
         try
         {
-
           accessToken = await tokens.getAccessToken(req);
-          console.log(accessToken);
         } catch (err) {
           console.log("Could not get access token. Try signing out and signing in again.");
           console.log(JSON.stringify(err));
@@ -68,7 +65,6 @@ router.get('/getAllUsers',
         if (accessToken && accessToken.length > 0)
         {
             try {
-              
               console.log(accessToken);
               var users = await graph.getUsers(accessToken);
               res.json(users);
@@ -98,15 +94,10 @@ router.get('/getAllUsersV2',
             var accessToken;
             try
             {
-
               accessToken = await tokens.getAccessToken(req);
-              console.log(accessToken);
-
             } catch (err) {
-              
               console.log("Could not get access token. Try signing out and signing in again.");
               console.log(JSON.stringify(err));
-
             }
 
             if (accessToken && accessToken.length > 0)
@@ -136,16 +127,15 @@ router.get('/getAllUsersV2',
                       }
                       else
                       {
-                        console.log(MESSAGE + "There is no next page.")  
+                        console.log("There is no next page.")  
                         break;
                       }
                   }
 
                 } catch (error) {
-
                   console.log(JSON.stringify(error));
                   res.json(error);
-
+                  return;
                 }
             }
         } //end While block
@@ -165,64 +155,33 @@ router.get('/getFilteredUsers/:name',
     {
       var filteredName = req.params.name;
       // Search for users with the specifiec name across multiple properties.
-      var requestUrl = "https://graph.microsoft.com/v1.0/users?$filter=startswith(displayName,'" + filteredName + "') or startswith(givenName,'" + filteredName + "') or startswith(surname,'" + filteredName + "') or startswith(mail,'" + filteredName + "') or startswith(userPrincipalName,'" + filteredName + "')&$top=999";
-      while(requestUrl)
+      // var requestUrl = "https://graph.microsoft.com/v1.0/users?$filter=startswith(displayName,'" + filteredName + "') or startswith(givenName,'" + filteredName + "') or startswith(surname,'" + filteredName + "') or startswith(mail,'" + filteredName + "') or startswith(userPrincipalName,'" + filteredName + "')&$top=999";
+      var requestUrl = "https://graph.microsoft.com/v1.0/users?$filter=startswith(displayName,'" + filteredName + "') or startswith(givenName,'" + filteredName + "') or startswith(surname,'" + filteredName + "') or startswith(mail,'" + filteredName + "') or startswith(userPrincipalName,'" + filteredName + "')";
+      var accessToken;
+      try
       {
-          //get access token
-          var accessToken;
-          try
-          {
+        accessToken = await tokens.getAccessToken(req);
+      } catch (err) {
+        console.log("Could not get access token. Try signing out and signing in again.");
+        console.log(JSON.stringify(err));
+      }
 
-            accessToken = await tokens.getAccessToken(req);
+      if (accessToken && accessToken.length > 0)
+      {
+          try {
+            
             console.log(accessToken);
-
-          } catch (err) {
-
-            console.log("Could not get access token. Try signing out and signing in again.");
-            console.log(JSON.stringify(err));
-
+            var users = await graph.getUsersV2(accessToken, requestUrl);
+            // res.json(users);
+            if (users)
+            {
+              res.json(users);
+            }
+          } catch (error) {
+            console.log(JSON.stringify(error));
+            res.json(error);
           }
-
-          if (accessToken && accessToken.length > 0)
-          {
-              try {
-                
-                console.log(accessToken);
-                var users = await graph.getUsersV2(accessToken, requestUrl);
-                // res.json(users);
-                if (users)
-                {
-                    usersVal = users[value];
-                    if (allUsers.length === 0)
-                    {
-                        allUsers = usersVal;
-                    }
-                    else
-                    {
-                        var nextUserList = usersVal;
-                        allUsers = allUsers.concat(nextUserList);
-                    }
-                    var nextLinkVal = users[nextLink];
-                    if (nextLinkVal)
-                    {
-                      requestUrl = nextLinkVal;
-                      // continue;
-                    }
-                    else
-                    {
-                      console.log(MESSAGE + "There is no next page.")  
-                      break;
-                    }
-                }
-
-              } catch (error) {
-
-                console.log(JSON.stringify(error));
-                res.json(error);
-
-              }
-          }
-      } //end While block
+      }
     }
   }
 );
