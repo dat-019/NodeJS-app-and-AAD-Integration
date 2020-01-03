@@ -25,7 +25,8 @@ router.post('/callback',
       response: res,
       failureRedirect: '/failure',
       failureFlash: true,
-      successRedirect: '/'
+      // successRedirect: '/'
+      successRedirect: 'http://localhost:4200/'
     }
     )(req, res, next);
   }
@@ -35,8 +36,21 @@ router.get('/signout',
   function(req, res) {
     req.session.destroy(function(err) {
       req.logout();
-      res.redirect('/');
+      // res.redirect('/');
+      res.redirect('http://localhost:4200/');
     });
+  }
+);
+
+router.get('/isAuthenticated',
+  function (req, res, next)
+  {
+    if (req.isAuthenticated()) {
+        res.json(true);
+    }
+    else {
+      res.json(false);
+    }
   }
 );
 

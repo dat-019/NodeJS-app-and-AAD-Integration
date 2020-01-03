@@ -1,0 +1,17 @@
+<h1>Users</h1>
+<table class="table">
+  <thead>
+    <th scope="col">Display Name</th>
+    <th scope="col">Given Name</th>
+    <th scope="col">Mail</th>
+    <th scope="col">Office Location</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.displayName}}</td>
+      <td>{{user.givenName}}</td>
+      <td>{{user.mail}}</td>
+      <td>{{user.officeLocation}}</td>
+    </tr>
+  </tbody>
+</table>
