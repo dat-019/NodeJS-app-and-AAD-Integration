@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'users', component: UsersComponent },
-  { 
+  {
     path: 'signin',
     canActivate: [RedirectGuardSignIn],
     component: RedirectGuardSignIn,
@@ -19,7 +19,7 @@ const routes: Routes = [
        externalUrl: 'http://localhost:3000/auth/signin'
      }
   },
-  { 
+  {
     path: 'signout',
     canActivate: [RedirectGuardSignOut],
     component: RedirectGuardSignOut,
