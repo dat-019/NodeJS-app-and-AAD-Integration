@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/ -->
+<html lang="en" class="js fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<!-- begin _includes/seo.html --><title>GitHub Branch Lifecycle within Visual Studio Code</title>
+<meta name="description" content="Walk through of a development branch lifecycle in VS Code…">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content=" ">
+<meta property="og:title" content="GitHub Branch Lifecycle within Visual Studio Code">
+<meta property="og:url" content="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/">
+
+
+  <meta property="og:description" content="Walk through of a development branch lifecycle in VS Code…">
+
+
+
+  <meta property="og:image" content="https://github.dxc.com/pages/AET/TIPS-ToolFinder/images/DacEditors/4c50971b882c555e02b70e67737eb155.gif">
+
+
+
+
+
+  <meta property="article:published_time" content="2019-10-29T00:00:00+00:00">
+
+
+
+  <meta property="article:modified_time" content="2019-10-29T00:00:00+00:00">
+
+
+
+  
+
+  
+
+
+<style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}</style><link rel="canonical" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/">
+
+
+
+
+
+
+
+  <script async="" src="./GitHub Branch Lifecycle within Visual Studio Code_files/analytics.js.download"></script><script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "TIPS - Tool Information Portals",
+      "url": "https://github.dxc.com/pages/AET/TIPS-ToolFinder",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/feed.xml" type="application/atom+xml" rel="alternate" title="  Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="./GitHub Branch Lifecycle within Visual Studio Code_files/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+  
+    
+    <script src="./GitHub Branch Lifecycle within Visual Studio Code_files/TIPS-ToolFinder-UI.js.download"></script>
+  
+    
+    <script src="./GitHub Branch Lifecycle within Visual Studio Code_files/TIPS_Customization.js.download"></script>
+  
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/images/favicon-16x16.png">
+<!--<link rel="manifest" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/assets/images/site.webmanifest">-->
+<link rel="mask-icon" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/images/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Fork me / contribute on GitHub ribbon -->
+<link rel="stylesheet" href="./GitHub Branch Lifecycle within Visual Studio Code_files/gh-fork-ribbon.css">
+<!--[if lt IE 9]>
+  <link rel="stylesheet" href="/css/gh-fork-ribbon.ie.css" />
+<![endif]-->
+<style>
+    /* DXC Black */
+    .github-fork-ribbon.left-top:before {
+        background-color: #000000;
+    }
+</style>
+
+<!-- Mermaid diagram library -->
+<script src="./GitHub Branch Lifecycle within Visual Studio Code_files/mermaid.min.js.download"></script>
+
+<!-- end custom head snippets -->
+
+    <style>
+      @media only screen and (max-width: 1024px) {
+     .smalldevicedisplay {
+      display: none;
+     }
+}
+</style>
+  <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+  <body style="margin-bottom: 284.85px;">
+    <a class="github-fork-ribbon left-top fixed smalldevicedisplay" title="Contribute on DXC GitHub" href="https://github.dxc.com/AET/TIPS-ToolFinder">Fork me on DXC GitHub</a>
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXCSymbol.gif" alt="DXC" height="39" width="56"> <!--XC customization - include DXC logo -->
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/"> </a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/index.html">Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/overview/">AboutUs</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/EDGE-Central/Pages/Ops_Home.html">SME Central</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://dxc.workplace.com/groups/EDGEConnect/">Let's Connect</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://dxc.workplace.com/groups/EDGEConnect/events/">Events</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/">Blogs</a>
+            </li>
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle" type="button" count="5" style="">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"><li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/Presentations-Library/">Enablement Library</a>
+            </li><li class="masthead__menu-item">
+              
+              <a href="https://web.microsoftstream.com/group/7229348b-6752-4a49-a8b9-4de7ae27876f?view=channels">Quick Videos</a>
+            </li><li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/general/glossary/">Glossary</a>
+            </li><li class="masthead__menu-item">
+              
+              <a href="https://github.dxc.com/AET/Issues-Feedback/issues/new/choose">Feedback</a>
+            </li><li class="masthead__menu-item">
+              
+              <a href="https://dxcportal.sharepoint.com/sites/edge/Pages/index.aspx">EDGE Process Framework</a>
+            </li></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+
+<style>
+
+ol {
+  margin-bottom: 0.1em;
+}
+
+ol {
+  margin-top: 0.1em;
+}
+
+</style>
+<nav class="breadcrumbs">
+  <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1">
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+          <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs" itemprop="item"><span itemprop="name">Blogs</span></a>
+          <meta itemprop="position" content="2">
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">GitHub Branch Lifecycle within Visual Studio Code</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox">
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          
+          
+
+          <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/index.html"><span class="nav__sub-title">Home</span></a>
+        
+
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Portals By Domain</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/bycore/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Core</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/byfunction/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> By Function</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/byindustry/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> By Industry</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/byrole/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> By Role</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/bytechnology/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> By Technology</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Portals By Enterprise Stack</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/byadvisory/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Advisory</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/bydataandanalytics/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Data, Analytics &amp; Engineering Services</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/byappsandindustry/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Applications and Industry IP</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/bycloudandsecurity/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Cloud &amp; Security</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/ito/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> ITO</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Portals By Industry</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/banking-and-capital-markets/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Banking and Capital Markets</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://whatwesell.dxc.com/dxc/industries/cme/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> CME and Tech</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://whatwesell.dxc.com/dxc/industries/retail/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Consumer Industries and Retail</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://whatwesell.dxc.com/dxc/industries/energy/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Energy</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/healthcare-and-life-sciences/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Healthcare and Life Sciences</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/insurance/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Insurance</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://whatwesell.dxc.com/dxc/industries/manufacturing/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Manufacturing</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://whatwesell.dxc.com/dxc/industries/public-sector/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Public Sector</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/travel-transportation-and-hospitality/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Travel, Transportation and Hospitality</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Portals By Offering</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/analytics/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Analytics</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/appservices/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Applications Services</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/business-process-services/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Business Process Services</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/consulting/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Consulting</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/cps/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Cloud &amp; Platform Services</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/cross/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Cross Offering Solutions</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/eca/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Enterprise &amp; Cloud Applications</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/security/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Security</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/wm/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Workplace &amp; Mobility</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Collaborate with Us...</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/AET/Issues-Feedback/issues/new/choose" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Submit Feedback</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/contributing/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Contribute to this Site</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/tailor/" class=""><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/DXC-Link-Icon.png" style="width:20px;height:20px;"> Replicate this Site</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+  <article class="page" itemscope="" itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GitHub Branch Lifecycle within Visual Studio Code">
+    <meta itemprop="description" content="Walk through of a development branch lifecycle in VS Code…">
+    <meta itemprop="datePublished" content="October 29, 2019">
+    <meta itemprop="dateModified" content="October 29, 2019">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">GitHub Branch Lifecycle within Visual Studio Code
+</h1>
+          
+            <p class="page__meta"><svg class="svg-inline--fa fa-clock fa-w-16" aria-hidden="true" data-prefix="far" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg><!-- <i class="far fa-clock" aria-hidden="true"></i> --> 
+
+
+
+
+  10 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<svg class="svg-inline--fa fa-file-alt fa-w-12" aria-hidden="true" data-prefix="fas" data-icon="file-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"></path></svg><!-- <i class="fas fa-file-alt"></i> --> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#introduction">Introduction</a>
+    <ul>
+      <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#lifecycle-steps-include">Lifecycle steps include:</a></li>
+    </ul>
+  </li>
+  <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#prerequisites">Prerequisites</a></li>
+  <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#editing-files-using-vscode">Editing Files using VSCode</a></li>
+  <li>
+<a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#references">References</a>
+    <ul>
+      <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#vscode-references">VSCode References:</a></li>
+      <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/blogs/github-branch-lifecycle-in-vscode/#github-references">GitHub References:</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h2 id="introduction">Introduction</h2>
+
+<p>This blog presents the complete edit lifecycle of a GitHub development branch using  <strong>Visual Studio Code</strong></p>
+
+<h3 id="lifecycle-steps-include">Lifecycle steps include:</h3>
+
+<div style="width: 100%;">
+  <div style="float: left; width: 55%; padding-left: 1em">
+    <ul>
+      <li>Cloning a repo to local Git</li>
+      <li>Creating a development branch</li>
+      <li>Editing files
+        <ul>
+          <li>Edit existing file</li>
+          <li>Create new folders/files</li>
+        </ul>
+      </li>
+      <li>Staging and Committing the changes to the local Git Repo</li>
+      <li>Publishing the resulting change set to GitHub</li>
+      <li>Create Pull Request for the development branch</li>
+      <li>Reviewing the changes within a Pull Request</li>
+      <li>Merging a Pull Request</li>
+      <li>Deleting the development branch</li>
+    </ul>
+  </div>
+
+  <div style="float: left;position:relative;top: -20px;width: 40%;height:300px;z-index: -1;text-align: center;">
+    <span class="fragment fade-up">
+      <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/4c50971b882c555e02b70e67737eb155.gif" alt="Github - Simple Edit cycle" text="Github - Simple Edit cycle">
+    </span>
+  </div>
+
+  <br style="clear: left;">
+</div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li>
+    <p>You have already installed and configured “Visual Code” for a GitHub:</p>
+
+    <ul>
+      <li>
+        <p>If you need to install Visual Studio, Refer to the MS-Stream Video : <a href="https://web.microsoftstream.com/video/efb6eaf4-1772-4ada-9b3a-695df9b6f074?channelId=94dec8d9-731e-454f-a073-f702f84305b0">Getting Started with VS Code</a>.  To access the links shown in this video, you can refer to the presentation slide deck at <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/presentations/techcom2019/VSCode4GitHub_Install.html">VSCode For GitHub Installing the Essential Components</a></p>
+      </li>
+      <li>
+        <p>VS Code Extensions referenced in this blog:</p>
+
+        <ul>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a></li>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in one</a></li>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a></li>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=tht13.html-preview-vscode">HTML Preview</a></li>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">GitLens</a></li>
+          <li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github">GitHub Pull Requests</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>This discussion assume you already have a GitHub repo to work with:</p>
+
+    <ul>
+      <li>If you need to create  a repo to work with, refer to the post <a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/406009859969885/">Getting started with GitHub</a> and <a href="https://web.microsoftstream.com/video/736807b1-6fc5-4b62-9617-1bc6b3ac26bd?channelId=b23ee545-7205-4c02-ac5d-7d31c54df1fa">GitHub - Organizations and Repos</a>.</li>
+    </ul>
+
+    <p>or</p>
+
+    <ul>
+      <li>Fork an existing Repo into your personal organization, refer to minute 5:50 of the video <a href="https://web.microsoftstream.com/video/3859fdd5-9516-4bfe-bca7-375fb76846d6?channelId=b23ee545-7205-4c02-ac5d-7d31c54df1fa">GitHub - Forks, Clones and Branches</a>.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="editing-files-using-vscode">Editing Files using VSCode</h2>
+
+<p>For details on installing VSCode, dependencies and extensions, Refer to the
+Video <a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/427109117859959/">Installing VS Code</a></p>
+
+<ol>
+  <li>
+    <p><strong>Open VS Code on your Desktop</strong></p>
+  </li>
+  <li>
+<strong>Clone the GitHub Repository:</strong>
+    <ul>
+      <li>
+        <p>The First step is to clone the repository you need to work with to our desktop. From the View Menu at the top of the VS Code window, select Command Palette…
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/26a2f1c7acde29a57656f3c8a97874ae.png" alt="VSCode - Command Palette"></p>
+      </li>
+      <li>
+        <p>From the Command Pallet pop-up, type “clone” to filter to the <strong>Git: Clone</strong> command:<br>
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/1b707edbeb889676b4d3e86759a768dc.png" alt="VSCode - Command Palette Filter"></p>
+      </li>
+      <li>
+        <p>Click the <strong>Git: Clone</strong> Command to initiate the clone, Paste/type the URL for the GitHub Repository you are working with and hit return to start the clone:<br>
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/f37da0c5afbb52692656bee5fb88d282.png" alt="Git Clone Repository URL"></p>
+      </li>
+      <li>
+        <p>From the file browser pop-up. Select the location on your PC to where you want the GitHub repository cloned (Ex. C:\Users\<em>userid</em>\Source\GitHub\<em>organization</em>)</p>
+
+        <blockquote>
+          <p><strong>Note:</strong> For DXC GitHub, if you are prompted for credentials to authorize your Clone of the remote GitHub Repository, use your GitHub user ID (DXC short name for DXC Github),
+ but <strong>DO NOT</strong> enter your password. Because DXC Github uses Multi-Factor Authentication
+ (MFA), authentication must utilize a personal access token.<br>
+     <img class="emoji" title=":small_orange_diamond:" alt=":small_orange_diamond:" src="./GitHub Branch Lifecycle within Visual Studio Code_files/1f538.png" height="20" width="20"> To create a Personal access token, refer to <a href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line">Creating a personal access token</a><br>
+     <img class="emoji" title=":small_orange_diamond:" alt=":small_orange_diamond:" src="./GitHub Branch Lifecycle within Visual Studio Code_files/1f538.png" height="20" width="20"> Use the Personal access token instead of your password to authenticate your Clone access request. Refer to minute 6:50 of the Video <a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/427109117859959/">Installing VS Code</a> for a demonstration</p>
+        </blockquote>
+      </li>
+      <li>
+        <p>When the clone is complete you will see a message at the bottom right of your editor window asking: “<em>Would you like to open the cloned repository?</em>”, Select “<strong>Open Repository</strong>”:<br>
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/663d6bc81b4b5d87f63f980e95a22464.png" alt="VSCode - Open Cloned Repository"></p>
+      </li>
+      <li>
+        <p>The Cloned Repository is now opened and available for editing within VSCode:<br>
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/8121ad9b83efbe29ea6ad502ed3da74a.png" alt="VSCode - Explorer"></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Review of the VSCode Vertical Navigation items:</strong></p>
+
+    <p><em>Table 1: VSCode - VSCode Vertical Menu</em></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Icon</th>
+          <th>Icon Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavExplorer.png" alt=""></td>
+          <td>Explorer to view the tree structure of the repository contents.</td>
+        </tr>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavSearch.png" alt=""></td>
+          <td>Search option to perform search of the repo contents</td>
+        </tr>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavGit.png" alt=""></td>
+          <td>Git tools to perform: &lt;ul&gt;&lt;li&gt;Staging of modified/added files for Commit&lt;/li&gt;&lt;li&gt;Commit of staged content to local Git&lt;/li&gt;&lt;li&gt;Publish/Push of Commits from local Git to the remote GitHub repository&lt;/li&gt;&lt;ul&gt;</td>
+        </tr>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavDebug.png" alt=""></td>
+          <td>Debugger window used for coding activities not addressed in this blog/discussion</td>
+        </tr>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavGitHub.png" alt=""></td>
+          <td>GitHub Extension that allows you to review and manage GitHub pull requests (not required for this discussion but will be required for branch based development</td>
+        </tr>
+        <tr>
+          <td><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavExtensions.png" alt=""></td>
+          <td>Extensions Tool used to find, install and manage VSCode extensions.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p><strong>Create a new Development Branch:</strong></p>
+
+    <ul>
+      <li>
+        <p>There are 2 ways to create a new GIT branch in VSCode:</p>
+
+        <ol>
+          <li>Click on the currently selected branch shown on the VSCode footer bar:
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Footer-Create_Branch_.png" alt="">
+</li>
+        </ol>
+
+        <p>OR</p>
+
+        <ol>
+          <li>Select the menu “View” - “Command Palette” (Ctrl+Shift+P), and then type “create branch”:<br>
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Command_Pallet-Create_Branch_.png" alt="">
+</li>
+        </ol>
+      </li>
+    </ul>
+
+    <blockquote>
+      <p>Note 1: This will isolate 2 commands, “Create new branch…” and “Create new branch from…”.  Generally you will want the “Create new branch…” command which will create your new branch from the “master” branch.  If you want your branch created from a branch other than the “master” branch, select the “Create new branch from…” command.</p>
+    </blockquote>
+
+    <blockquote>
+      <p>Note 2: In either case, it is generally recommended that a descriptive branch name be used.  This might include references to sprint, feature, etc. and use the “/” character as a delimiter (ex. <strong>sprint ID/feature ID</strong> ).  Use of the “/” character as a delimiter makes it easier to search the branches based on various aspects of the branch name. For simple updates to a stable repo, use user identifier, date and short name (ex. <strong>mjk\20191029-Branch Lifecycle blog</strong>).</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Open Edit Window:</strong></p>
+
+    <ul>
+      <li>Select the Explorer ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavExplorer.png" alt="Explorer"> ) from the Vertical navigation</li>
+      <li>Select/Click at Markdown file from the project to edit to open the file in an editor pane</li>
+    </ul>
+
+    <ol>
+      <li>
+        <p><strong>Preview :</strong></p>
+
+        <ol>
+          <li>
+            <p><strong>Markdown</strong>: (assumes the “Markdown All in one” extension is installed)</p>
+
+            <ul>
+              <li>To open a preview of the Markdown file contents, select the Open Preview Icon ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/d4991400d44d1db71b0187807dfd491b.png" alt="Open Preview Icon">) ) from the editor pane’s horizontal menu.</li>
+              <li>This provides a preview of the Markdown content that can let you know that your intended formatting is actually implemented.</li>
+              <li>Any updates to the markdown content in the editor window are automatically visible in the preview window. With the extension <a href="https://marketplace.visualstudio.com/items?itemName=bierner.github-markdown-preview">Github Markdown Preview</a> installed and active, the use of GitHub Emoji’s (ex. “<img class="emoji" title=":smile:" alt=":smile:" src="./GitHub Branch Lifecycle within Visual Studio Code_files/1f604.png" height="20" width="20">”) within markdown content will be visualized in the preview pane:
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/6cfdbf4fb69661bc070d77774c6ecbbc.png" alt="VSCode - Markdown preview">
+</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>HTML</strong>  (assumes the “HTML Preview” extension is installed)</p>
+            <ul>
+              <li>As with the Markdown preview, to open a preview of the HTML file contents, select the Open Preview Icon ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/d4991400d44d1db71b0187807dfd491b.png" alt="Open Preview Icon">) ) from the editor pane’s horizontal menu:
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub-HTML_Preview_.png" alt="VSCode - HTML preview">
+</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+      <li>
+<strong>Create as PDF:</strong> (assumes the “Markdown PDF” extension is installed)
+        <ul>
+          <li>Markdown PDF extension: to create a PDF document of a Markdown file:</li>
+          <li>
+            <p>From the View Menu at the top of the VS Code, select Command Palette…<br>
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/26a2f1c7acde29a57656f3c8a97874ae.png" alt="VSCode - Command Palette">)</p>
+          </li>
+          <li>
+            <p>From the Command Pallet pop-up, type “PDF” to filter to the <strong>Markdown PDF: Export</strong> commands: 
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/892d22a62fd7bd070b90748299fe1090.png" alt="VSCode - Command Palette Filter">)</p>
+          </li>
+          <li>Click the <strong>Markdown PDF: Export(pdf)</strong> command to initiate the creation of the PDF document from the selected Markdown file:
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/f37da0c5afbb52692656bee5fb88d282.png" alt="VSCode - Git Clone Repository URL">)</li>
+        </ul>
+
+        <blockquote>
+          <p>The resulting PDF version of the file is created in the same folder as the source Markdown file. If you do not want the PDF to become part of the Git Repo, you should copy the PDF to a location outside of the Repository folder and delete the PDF file within the Repository file.</p>
+        </blockquote>
+      </li>
+      <li>
+        <p><strong>Lint:</strong></p>
+
+        <ul>
+          <li>
+<a href="https://en.wikipedia.org/wiki/Lint_(software)">Linting</a> is the action of analyzing source code to flag programming errors, bugs, stylistic errors, and suspicious constructs.</li>
+        </ul>
+
+        <ol>
+          <li>
+            <p>Markdown Linting (assumes “Markdown All in one” extension is installed)</p>
+
+            <ul>
+              <li>With the installation of the <a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint&nbsp;</a>extension, this functionality is available for your Markdown content.</li>
+              <li>To access the lint console, refer to the warnings icon ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/a1a5e6ae315c07d4c29d17e6e5514de2.png" alt="warnings icon">) ) in the left side of the VSCode footer:
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/Figure11_VSCode-LintIconInFooter.png" alt="VSCode - Lint Icon in Footer">
+</li>
+              <li>
+                <p>Selecting this icon opens the Lint console: 
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/b11e2b3610477aef95369abdd19b9984.png" alt="VSCode - Lint Console"></p>
+
+                <blockquote>
+                  <p>The Lint warnings can be fairly verbose and many of the warnings can be ignored as they will have no impact on the resulting page when presented by GitHub. The Markdown preview should be your primary point of reference when determining if your markdown is correct. It is recommended that you refer to the Lint warnings when you notice the results in the preview are not matching with your expectations.</p>
+                </blockquote>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>JavaScript/TypeScript (assumes “ESLint” extension is installed)</p>
+
+            <ul>
+              <li>by install ESLint, you will get the linting information for your JavaScript and Typescript files</li>
+              <li>Selecting this icon opens the Lint console:  q  <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/ESLint_Messages.PNG" alt="VSCode - Lint Console">
+</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p><strong>Git Stage, Commit, Publish:</strong>
+Once changes have been made to files within the repository, these changes need to be staged and committed to the local repo as a change set.  After a Change set has been committed to the local Git, this Change set needs to be published to the Remote GitHub Repository.  This section covers the steps to perform the Stage, Commit and Publish actions:</p>
+
+    <ul>
+      <li>
+        <p><strong>Stage updates:</strong></p>
+
+        <ul>
+          <li>After your updates have been completed, you can identify any changes you wish to keep by Staging the affected files</li>
+          <li>The number in blue circle overlaying the Git Menu Item on your vertical menu shows the number of files that have been changed/added<br>
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/79d8260e7e40e1e166ece44ce7fda71f.png" alt="">)</li>
+          <li>Click on the Git Menu Item to view the set of files that have been changed:<br>
+ <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/Figure14_VSCode-GitMenu-ListUpdatedFiles.png" alt="">)</li>
+          <li>
+            <p>You can either select all files to be staged or individually selected files to be updated for Commit”</p>
+          </li>
+          <li>
+            <p><strong>Stage All Changes</strong></p>
+
+            <p><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/Figure15_VSCode-StageAllChanges.png" alt="">)</p>
+          </li>
+          <li>
+            <p><strong>Stage “Individual” Changes</strong></p>
+
+            <p><img src="./GitHub Branch Lifecycle within Visual Studio Code_files/Figure16_VSCode-StageIndividualChanges.png" alt="">)</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>For this demo we select the “Stage All Changes” which selects all modified files and sets them as Staged for commit. To commit this changes to the Local Git repository, you need to enter a Commit message and select the Commit check mark icon:
+  <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/Figure17_VSCode-StageChangesFieldDescriptions.png" alt="">)</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Now that the Changes have been Committed to the local Repo, the change set needs to be <strong>Published</strong> which moves the change to the Remote Github repository. To Publish, there are 2 options:</p>
+
+    <p><strong>Publish from the Git Pane menu</strong> :</p>
+
+    <div class="highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>![](/pages/AET/TIPS-ToolFinder/images/DacEditors/Figure18_VSCode-PublishFromGitPaneMenu.png))  
+</code></pre></div>    </div>
+
+    <p><strong>Publish from the VSCode Footer menu</strong> :</p>
+
+    <div class="highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>![](/pages/AET/TIPS-ToolFinder/images/DacEditors/Figure19_VSCode-PublishFromVSCodeFooterMenu.png))  
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>Selecting either approach for Publishing will push the local Commits to the Remote GitHub Repository</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Generate Pull Request (assumes “GitHub Pull Requests” extension is installed)</p>
+
+    <ul>
+      <li>
+        <p>Once the changes are committed and published to the Remote GitHub repo, we can create Pull Request to initiate the review process to have the branch changes merged into the master</p>
+      </li>
+      <li>
+        <p>select the <strong>GitHub Pull Requests</strong> ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/icon_VSCode-VertNavGitHub.png" alt=""> ) Icon from VSCode’s Vertical menu.</p>
+      </li>
+    </ul>
+
+    <ol>
+      <li>
+        <p>Create Pull Request</p>
+
+        <ul>
+          <li>
+            <p>Select the “<strong>+</strong>” icon from the GitHub Pull Request Menu to start the creation of a new Pull Request:
+<img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub Pull_Request-Detail_.png" alt=""></p>
+
+            <blockquote>
+              <p><strong>Note:</strong> Since the previously created development branch is already selected and visible in the footer, this will be the source for the pull request.  you will be presented with a prompt requesting the target branch for the new Pull Request.  This will be defaulted to <strong>master</strong> which is the branch we want to target for this demo, but it could easily be a separate branch, such as a sprint development branch.</p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Complete on Pull Request</p>
+
+        <ul>
+          <li>After the Pull Request is created, you are presented with the Description/Conversation for the Pull Request:
+ ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Pull_Request-Create_.png" alt=""> )</li>
+          <li>If you are a reviewer, you will look at each of the changed files by accessing each of the changed files in the “CHANGES IN PULL REQUEST” section:
+ ( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Pull_Request-Code_Review_.png" alt=""> )</li>
+          <li>As a reviewer, you will normally make a comment and use the “<strong>Approve</strong>” or “<strong>Request Changes</strong>” button.
+            <ul>
+              <li>since we are the creator of the Pull Request, attempts to use the “<strong>Approve</strong>” button will fail because as the creator of the Pull request, you cannot “<strong>Approve</strong>” it:<br>
+( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Pull_Request-Approve-Fail_.png" alt=""> )</li>
+              <li>If you are an Admin or Owner of the Repo, you can force a Merge of the Pull Request (even if you were the creator of the Pull Request) by selecting the “<strong>Merge Pull Request</strong>” button.  In this situation you should still leave a comment to document your reasons.
+( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Pull_Request-Merge-Commit_.png" alt=""> )</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Delete Development Branch</p>
+
+        <ul>
+          <li>Now that your personal development branch has been merged into the “master” branch, this branch can be deleted. You will find there is a “Delete Branch” option/button presented on the Pull Request form after it has been merged:
+( <img src="./GitHub Branch Lifecycle within Visual Studio Code_files/GitHub_Pull_Request-Branch_Delete_.png" alt=""> )</li>
+          <li>In selecting the “<strong>Delete Branch</strong>” button, you are asked if you want to delete both the local (Git) and remote (GitHub) versions of the branch.  You will want to leave these selected and select the “<strong>OK</strong>” button.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>You have now completed the full Lifecycle for a development Branch.</p>
+
+<h2 id="references">References</h2>
+
+<p>Video for this discussion coming soon to : (Let’s Connect Videos)[https://dxc.workplace.com/groups/EDGEConnect/videos/]</p>
+
+<h3 id="vscode-references">VSCode References:</h3>
+<ul>
+  <li>Install Local&nbsp;<a href="https://git-scm.com/downloads">Git</a>
+</li>
+  <li>Install&nbsp;<a href="https://code.visualstudio.com/docs/setup/setup-overview">Visual Studio
+  Code</a>
+</li>
+  <li>Recommended VSCode Extensions:
+    <ul>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> All you need for Markdown (keyboard shortcuts, table of contents, auto preview and more).</li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">Markdown Preview Enhanced</a> Markdown Preview Enhanced ported to VSCode</li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=hnw.vscode-auto-open-markdown-preview">Auto-Open Markdown Preview</a> This VS Code extension automatically shows Markdown preview whenever you open new Markdown file</li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a> extension to convert Markdown file to pdf, html, png or jpeg file.</li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=bierner.github-markdown-preview">Github Markdown Preview</a>extension pack of the following VS Code markdown preview extensions:
+        <ul>
+          <li>
+<strong>Markdown Preview Github Styling</strong>&nbsp;— CSS that makes the preview match Github’s markdown style.</li>
+          <li>
+<strong>Markdown Emoji</strong>&nbsp;- Adds&nbsp;:emoji:&nbsp;support to the markdown preview.</li>
+          <li>
+<strong>Markdown Checkboxes</strong>&nbsp;- Adds&nbsp;- [ ] task list&nbsp;support to the markdown preview.</li>
+          <li>
+<strong>Markdown yaml Preamble</strong>&nbsp;- Adds support for rendering the yaml frontmatter as a table. Be sure to set&nbsp;”markdown.previewFrontMatter”: “show”</li>
+        </ul>
+      </li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint&nbsp;</a> Markdown/CommonMark linting and style checking for Visual Studio Code</li>
+      <li>
+<a href="https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github">GitHub Pull Requests</a> extension allows you to review and manage GitHub pull requests. This will be required to merge onto the master branch any updates performed on development branches</li>
+      <li>Install Guidance Video :&nbsp;<a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/427109117859959/">Installing VS Code</a>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="github-references">GitHub References:</h3>
+<ul>
+  <li>
+<a href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line">Creating a personal access token</a> use personal Access tokens when you initially need to authenticate on your first Clone using VSCode. Refer to the Video <a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/427109117859959/">Installing VS Code</a> minute 6:50 for a demonstration of the creation and use of a Personal access token when cloning within VSCode.</li>
+  <li><a href="https://dxc.workplace.com/groups/EDGEConnect/permalink/427111547859716/">VSCode Primer, Editing with Branches</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><svg class="svg-inline--fa fa-folder-open fa-w-18 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="folder-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M572.694 292.093L500.27 416.248A63.997 63.997 0 0 1 444.989 448H45.025c-18.523 0-30.064-20.093-20.731-36.093l72.424-124.155A64 64 0 0 1 152 256h399.964c18.523 0 30.064 20.093 20.73 36.093zM152 224h328v-48c0-26.51-21.49-48-48-48H272l-64-64H48C21.49 64 0 85.49 0 112v278.046l69.077-118.418C86.214 242.25 117.989 224 152 224z"></path></svg><!-- <i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> --> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/categories/#blogs" class="page__taxonomy-item" rel="tag">Blogs</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><svg class="svg-inline--fa fa-calendar-alt fa-w-14 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="calendar-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M436 160H12c-6.6 0-12-5.4-12-12v-36c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48v36c0 6.6-5.4 12-12 12zM12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm116 204c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm128 128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40zm0-128c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12v-40z"></path></svg><!-- <i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> --> Updated:</strong> <time datetime="2019-10-29">October 29, 2019</time></p>
+        
+      </footer>
+
+      
+
+      
+<!--  <nav class="pagination">
+    
+      <a href="/pages/AET/TIPS-ToolFinder/blogs/ms-uservoice/" class="pagination--pager" title="How to request for MS product features
+">Previous</a>
+    
+    
+      <a href="/pages/AET/TIPS-ToolFinder/blogs/opensource-dxc/" class="pagination--pager" title="Open Source Delivery Risks @DXC
+">Next</a>
+    
+  </nav> -->
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term...">
+    <div id="results" class="results"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    <!-- DXC customization - add Workgroup link to standard footer-->
+    
+      <li><a href="https://dxc.workplace.com/groups/EDGEConnect"><svg class="svg-inline--fa fa-facebook-square fa-w-14 fa-fw" aria-hidden="true" data-prefix="fab" data-icon="facebook-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path></svg><!-- <i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> --> Workplace@DXC</a></li>
+    
+    
+      <li>
+<svg class="svg-inline--fa fa-github fa-w-16 fa-fw fa-inverse" aria-hidden="true" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-fw fa-inverse fa-github"></i> --> <a href="https://github.dxc.com/AET/TIPS-ToolFinder/">GitHub @DXC</a>
+</li>
+    <!--      <li><a href="https://github.dxc.com/AET/TIPS-ToolFinder/"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub @DXC</a></li>-->
+    
+    
+    
+    <li><a href="https://github.dxc.com/pages/AET/TIPS-ToolFinder/feed.xml"><svg class="svg-inline--fa fa-rss-square fa-w-14 fa-fw" aria-hidden="true" data-prefix="fas" data-icon="rss-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM112 416c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm157.533 0h-34.335c-6.011 0-11.051-4.636-11.442-10.634-5.214-80.05-69.243-143.92-149.123-149.123-5.997-.39-10.633-5.431-10.633-11.441v-34.335c0-6.535 5.468-11.777 11.994-11.425 110.546 5.974 198.997 94.536 204.964 204.964.352 6.526-4.89 11.994-11.425 11.994zm103.027 0h-34.334c-6.161 0-11.175-4.882-11.427-11.038-5.598-136.535-115.204-246.161-251.76-251.76C68.882 152.949 64 147.935 64 141.774V107.44c0-6.454 5.338-11.664 11.787-11.432 167.83 6.025 302.21 141.191 308.205 308.205.232 6.449-4.978 11.787-11.432 11.787z"></path></svg><!-- <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> --> Feed</a></li>
+  </ul>
+</div>
+<!-- make Powered By bold -->
+<div class="page__footer-copyright"><strong>© 2019 TIPS - Tool Information Portals. Powered by <a href="https://jekyllrb.com/" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/" rel="nofollow">Minimal Mistakes</a>. </strong></div>
+
+<!--DXC customization add contribute section-->
+<br>
+<div class="page__footer-follow">
+  <svg class="svg-inline--fa fa-github fa-w-16 fa-fw fa-inverse" aria-hidden="true" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-fw fa-inverse fa-github"></i> --> Help us make this site awesome:
+  <a href="https://github.dxc.com/AET/TIPS-ToolFinder/edit/master/_posts/2019-10-29-blog-github_branch_lifecycle_in_vscode.md"><svg class="svg-inline--fa fa-edit fa-w-18" aria-hidden="true" data-prefix="fa" data-icon="edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path></svg><!-- <i class="fa fa-edit"></i> --> edit this page</a>,
+  <a href="https://github.dxc.com/AET/TIPS-ToolFinder/issues/new?labels=bug"><svg class="svg-inline--fa fa-bug fa-w-16" aria-hidden="true" data-prefix="fa" data-icon="bug" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M511.988 288.9c-.478 17.43-15.217 31.1-32.653 31.1H424v16c0 21.864-4.882 42.584-13.6 61.145l60.228 60.228c12.496 12.497 12.496 32.758 0 45.255-12.498 12.497-32.759 12.496-45.256 0l-54.736-54.736C345.886 467.965 314.351 480 280 480V236c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v244c-34.351 0-65.886-12.035-90.636-32.108l-54.736 54.736c-12.498 12.497-32.759 12.496-45.256 0-12.496-12.497-12.496-32.758 0-45.255l60.228-60.228C92.882 378.584 88 357.864 88 336v-16H32.666C15.23 320 .491 306.33.013 288.9-.484 270.816 14.028 256 32 256h56v-58.745l-46.628-46.628c-12.496-12.497-12.496-32.758 0-45.255 12.498-12.497 32.758-12.497 45.256 0L141.255 160h229.489l54.627-54.627c12.498-12.497 32.758-12.497 45.256 0 12.496 12.497 12.496 32.758 0 45.255L424 197.255V256h56c17.972 0 32.484 14.816 31.988 32.9zM257 0c-61.856 0-112 50.144-112 112h224C369 50.144 318.856 0 257 0z"></path></svg><!-- <i class="fa fa-bug"></i> --> report an issue</a>
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="./GitHub Branch Lifecycle within Visual Studio Code_files/main.min.js.download"></script>
+  <script src="./GitHub Branch Lifecycle within Visual Studio Code_files/all.js.download"></script>
+
+
+
+
+<script src="./GitHub Branch Lifecycle within Visual Studio Code_files/lunr.min.js.download"></script>
+<script src="./GitHub Branch Lifecycle within Visual Studio Code_files/lunr-store.js.download"></script>
+<script src="./GitHub Branch Lifecycle within Visual Studio Code_files/lunr-en.js.download"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-131895306-1', 'auto');
+  ga('set', 'anonymizeIp', false)
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+  
+
+</body></html>
