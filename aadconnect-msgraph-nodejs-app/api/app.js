@@ -90,6 +90,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var calendarRouter = require('./routes/calendar');
+var tech6SPRouter = require('./routes/tech6');
 
 var session = require('express-session');
 
@@ -140,5 +141,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', calendarRouter);
+app.use('/tech6', tech6SPRouter);
 
 module.exports = app;
