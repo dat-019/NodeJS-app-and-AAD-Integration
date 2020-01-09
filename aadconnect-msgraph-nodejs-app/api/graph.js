@@ -44,9 +44,6 @@ module.exports = {
   getDataV2: function(accessToken, requestUrl) {
 
       var deferred = Q.defer();
-
-      // Make a request to get all users in the tenant. Use $select to only get
-      // necessary values to make the app more performant.
       request.get(requestUrl, {
         auth: {
             bearer: accessToken
