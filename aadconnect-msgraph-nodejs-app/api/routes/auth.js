@@ -8,7 +8,7 @@ router.get('/signin',
     passport.authenticate('azuread-openidconnect',
     { 
         response: res,
-        prompt: 'login',
+        prompt: 'login', // 'consent',
         failureRedirect: '/',
         failureFlash: true,
         successRedirect: '/'
@@ -25,8 +25,8 @@ router.post('/callback',
       response: res,
       failureRedirect: '/failure',
       failureFlash: true,
-      // successRedirect: '/'
-      successRedirect: 'http://localhost:4200/'
+      successRedirect: '/'
+      // successRedirect: 'http://localhost:4200/'
     }
     )(req, res, next);
   }

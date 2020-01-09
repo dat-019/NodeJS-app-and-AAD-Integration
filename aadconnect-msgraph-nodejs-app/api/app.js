@@ -82,6 +82,7 @@ passport.use(new OIDCStrategy(
       passReqToCallback: false,
       loggingNoPII: false,
       scope: process.env.OAUTH_SCOPES.split(' ') // ['profile', '.default', 'offline_access']
+      //OAUTH_SCOPES='profile offline_access Sites.Read.All Files.Read.All Files.ReadWrite.All Sites.ReadWrite.All'
     },
     signInComplete
   ));
