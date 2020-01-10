@@ -42,8 +42,8 @@ router.get('/getTech6ItemList',
           res.json(error);
         }
       }
+      res.json(itemList);
     }
-    res.json(itemList);
   }
 );
 
