@@ -26,7 +26,7 @@ router.get('/getTech6ItemList',
         var requestUrl = "https://graph.microsoft.com/v1.0/sites/d7b730f3-e885-4dbe-934a-f37dc254977b/lists/4ed562b8-7e69-4257-81a7-abea7440b78c/items?$expand=fields";
         try {
           do {
-            var list = await graph.getTech6ItemList(accessToken, requestUrl);
+            var list = await graph.getData(accessToken, requestUrl);
             if (list) {
               (list.value).forEach(element => {
                 itemList.push(element);

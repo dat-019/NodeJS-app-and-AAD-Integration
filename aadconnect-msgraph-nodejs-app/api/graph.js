@@ -42,12 +42,6 @@ module.exports = {
     return responsedBlog;
   },
 
-  // Begin Tech6
-  getTech6ItemList: async function (accessToken, requestUrl) {
-    var client = getAuthenticatedClient(accessToken);
-    var responsedBlog = await client.api(requestUrl).get();
-    return responsedBlog;
-  },
   filterTech6ItemTitles: async function (accessToken, requestUrl, filteredTitle) {
     var client = getAuthenticatedClient(accessToken);
     var responsedBlog = await client
