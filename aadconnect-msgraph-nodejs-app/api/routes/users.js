@@ -105,7 +105,7 @@ router.get('/getAllUsersV2',
                 try {
                   
                   console.log(accessToken);
-                  var users = await graph.getUsersV2(accessToken, requestUrl);
+                  var users = await graph.getData(accessToken, requestUrl);
                   // res.json(users);
                   if (users)
                   {
@@ -171,7 +171,7 @@ router.get('/getFilteredUsers/:name',
           try {
             
             console.log(accessToken);
-            var users = await graph.getUsersV2(accessToken, requestUrl);
+            var users = await graph.getData(accessToken, requestUrl);
             // res.json(users);
             if (users)
             {
