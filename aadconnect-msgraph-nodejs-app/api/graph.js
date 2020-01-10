@@ -6,7 +6,7 @@ const Q = require('q');
 
 
 module.exports = {
-  getUserDetails: async function(accessToken) {
+  getUserDetails: async function (accessToken) {
 
     var client = getAuthenticatedClient(accessToken);
 
@@ -14,7 +14,7 @@ module.exports = {
     return user;
   },
 
-  getEvents: async function(accessToken) {
+  getEvents: async function (accessToken) {
 
     var client = getAuthenticatedClient(accessToken);
 
@@ -27,17 +27,36 @@ module.exports = {
     return events;
   },
 
-  getUsers: async function(accessToken) {
+  getUsers: async function (accessToken) {
 
     var client = getAuthenticatedClient(accessToken);
     var users = await client.api('/users?$top=999').get();
     return users;
   },
 
+
   getData: async function(accessToken, requestUrl) {
 
     var client = getAuthenticatedClient(accessToken);
     var responsedBlog = await client.api(requestUrl).get();
+    return responsedBlog;
+  },
+
+  // Begin Tech6
+  getTech6ItemList: async function (accessToken, requestUrl) {
+    var client = getAuthenticatedClient(accessToken);
+    var responsedBlog = await client.api(requestUrl).get();
+    return responsedBlog;
+  },
+  filterTech6ItemTitles: async function (accessToken, requestUrl, filteredTitle) {
+    var client = getAuthenticatedClient(accessToken);
+    var responsedBlog = await client
+      .api(requestUrl)
+      .select("id", "createdBy", "fields")
+      .header("Prefer", "HonorNonIndexedQueriesWarningMayFailRandomly")
+      .expand("fields")
+      .filter("startswith(fields/Title, '" + filteredTitle + "') ")
+      .get();
     return responsedBlog;
   },
 
