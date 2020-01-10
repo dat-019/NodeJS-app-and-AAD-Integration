@@ -84,8 +84,9 @@ router.get('/filterTech6ItemTitles/:title',
           console.log(JSON.stringify(error));
           res.json(error);
         }
-
-    res.json(itemList);
+      }
+      res.json(itemList);
+    }
   }
 );
 
