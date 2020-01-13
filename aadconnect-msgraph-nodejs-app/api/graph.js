@@ -54,6 +54,16 @@ module.exports = {
     return responsedBlog;
   },
 
+  filterTech6Item: async function (accessToken, requestUrl) {
+    var client = getAuthenticatedClient(accessToken);
+    var responsedBlog = await client
+      .api(requestUrl)
+      .header("Prefer", "HonorNonIndexedQueriesWarningMayFailRandomly")
+      .top(999)
+      .get();
+    return responsedBlog;
+  },
+
   getDataV2: function(accessToken, requestUrl) {
 
       var deferred = Q.defer();
